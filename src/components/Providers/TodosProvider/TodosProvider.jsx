@@ -4,9 +4,30 @@ import styles from './TodosProvider.module.css'
 const TodosContext = createContext();
 const TodosContextDispatcher = createContext();
 
-const initialState = [];
+const initialState = [
+    {
+        id: 16825255501323,
+        content: 'First Task',
+        createdAt: '2022-04-26T17:16:41.323Z',
+        isCompleted: false,
+    },
+    {
+        id: 1682529401323,
+        content: 'Second Task',
+        createdAt: '2023-04-26T17:16:41.323Z',
+        isCompleted: false,
+    },
+    {
+        id: 1855529401323,
+        content: 'Third Task',
+        createdAt: '2023-06-26T17:16:41.323Z',
+        isCompleted: false,
+    }
+];
 const reducer = (state, action) => {
     const date = new Date();
+    const todos = [...state];
+    let index = 0, todo = {};
     switch(action.type){
         case 'add':
             const content = action.todo;
@@ -14,7 +35,6 @@ const reducer = (state, action) => {
                 alert('Please Enter A Todo...');
                 return state;
             }
-            const todos = [...state];
             todos.push({
                 id: date.getTime(),
                 content,
@@ -22,8 +42,17 @@ const reducer = (state, action) => {
                 isCompleted: false,
             })
             return todos
-        case 'remove':
-            return;
+        case 'delete':
+            const filteredTodos = todos.filter(todo => todo.id !== action.todoId);
+            return filteredTodos;
+        case 'edit':
+            return state;
+        case 'complete':
+            index = todos.findIndex(todo => todo.id === action.todoId);
+            todo = {...state[index]};
+            todo.isCompleted = !todo.isCompleted;
+            todos[index] = todo;
+            return todos;
         default:
             return state;
     }
