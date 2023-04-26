@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div className={styles.app}>
       <TodosProvider>
-        <TodoApp/>
+        <TodoApp />
       </TodosProvider>
     </div>
   );

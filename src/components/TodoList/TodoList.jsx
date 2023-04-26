@@ -1,6 +1,7 @@
 import { useTodos } from '../Providers/TodosProvider/TodosProvider';
-import styles from './TodoList.module.css'
-const TodoList = (props) => {
+// import styles from './TodoList.module.css'
+const TodoList = () => {
+    // const todos = props.todos;
     const todos = useTodos();
     return ( 
         <div>
