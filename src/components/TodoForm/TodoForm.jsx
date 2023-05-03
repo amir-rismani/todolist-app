@@ -1,15 +1,16 @@
 import { useState } from 'react';
-// import styles from './TodoForm.module.css'
 import { useTodosActions } from '../Providers/TodosProvider/TodosProvider';
+import { VscAdd, VscEdit } from "react-icons/vsc";
+import styles from './TodoForm.module.css'
+
 // By Rasing Event
 // const TodoForm = ({onAddTodo}) => {
 // By send state and setState method
 // const TodoForm = ({todos, setTodos}) => {
 // By Context + Reducer
-const TodoForm = () => {
+const TodoForm = ({submitType="add", inputValue="", todoId}) => {
     const dispatch = useTodosActions();
-
-    const [todo, setTodo] = useState('');
+    const [todo, setTodo] = useState(inputValue);
 
     const changeTodoHandler = (event) => {
         setTodo(event.target.value);
@@ -41,16 +42,18 @@ const TodoForm = () => {
         // addTodo();
 
         // By Context + Reducer
-        dispatch({type: 'add', todo});
-
-        setTodo("");
+        if(submitType==='edit') dispatch({type: submitType, todo, todoId});
+        else{
+            dispatch({type: submitType, todo});
+            setTodo("");
+        }
     }
 
     return ( 
-        <div>
+        <div className={`${styles.formContainer} ${submitType}`}>
             <form onSubmit={submitHandler}>
                 <input type='text' value={todo} onChange={changeTodoHandler}/>
-                <button type='submit'>Add</button>
+                <button type='submit'>{submitType === 'add' ? <VscAdd/> : <VscEdit/> }</button>
             </form>
         </div>
     );

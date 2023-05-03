@@ -8,7 +8,7 @@ const TodoList = () => {
 
     const renderTodos = () => {
         if (!todos.length) return <span>Todos not exist...</span>
-        return todos.map((todo) => <Todo todo={todo}/>)
+        return todos.map((todo) => <Todo todo={todo} key={todo.id}/>)
     }
     
     return <div className={styles.todos}>{renderTodos()}</div>

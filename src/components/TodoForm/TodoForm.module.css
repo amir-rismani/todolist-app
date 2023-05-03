@@ -1,0 +1,30 @@
+form{
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    border: 1px solid lightgray;
+    padding: 0 .2rem;
+    border-radius: 5px;
+    background: white;
+}
+
+input{
+    outline: none;
+    border: none;
+    width: 15rem;
+    height: 2rem;
+    padding: 0px .5rem;
+    font-size: medium;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: large;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

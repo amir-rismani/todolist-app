@@ -2,6 +2,7 @@
 import TodoForm from '../TodoForm/TodoForm';
 import TodoList from '../TodoList/TodoList';
 import styles from './TodoApp.module.css'
+
 const TodoApp = () => {
     // First way: use state and rasing event
     // const [todos, setTodos] = useState([])
@@ -24,7 +25,7 @@ const TodoApp = () => {
 
     return (
         <div className={styles.container}>
-            <h1>Todo App Component</h1>
+            <h1>Todo App</h1>
             {/* Rasing Event */}
             {/* <TodoForm onAddTodo={addTodoHandler}/> */}
             {/* Or send state and setState method */}

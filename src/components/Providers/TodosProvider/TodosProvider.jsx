@@ -24,13 +24,14 @@ const initialState = [
         isCompleted: false,
     }
 ];
+
 const reducer = (state, action) => {
     const date = new Date();
     const todos = [...state];
-    let index = 0, todo = {};
+    let index = 0, todo = {}, content = "";
     switch(action.type){
         case 'add':
-            const content = action.todo;
+            content = action.todo;
             if(!content){
                 alert('Please Enter A Todo...');
                 return state;
@@ -46,8 +47,18 @@ const reducer = (state, action) => {
             const filteredTodos = todos.filter(todo => todo.id !== action.todoId);
             return filteredTodos;
         case 'edit':
-            return state;
-        case 'complete':
+            content = action.todo;
+            if(!content){
+                alert('Please Enter A Todo...');
+                return state;
+            }
+            index = todos.findIndex(todo => todo.id === action.todoId);
+            todo = {...state[index]};
+            todo.content = content;
+            todo.updatedAt = date.toISOString();
+            todos[index] = todo;
+            return todos;
+            case 'complete':
             index = todos.findIndex(todo => todo.id === action.todoId);
             todo = {...state[index]};
             todo.isCompleted = !todo.isCompleted;
