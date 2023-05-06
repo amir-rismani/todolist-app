@@ -1,0 +1,29 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem auto;
+}
+
+.badge{
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 100%;
+    margin-right: .3rem;
+    font-weight: bold;
+}
+
+.message{
+    font-size: larger;
+    font-weight: bold;
+}
+
+.message.success{
+    color: green;
+}

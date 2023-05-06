@@ -9,7 +9,7 @@ const initialState = [
         id: 16825255501323,
         content: 'First Task',
         createdAt: '2022-04-26T17:16:41.323Z',
-        isCompleted: false,
+        isCompleted: true,
     },
     {
         id: 1682529401323,
@@ -48,6 +48,7 @@ const reducer = (state, action) => {
             return filteredTodos;
         case 'edit':
             content = action.todo;
+            console.log(content);
             if(!content){
                 alert('Please Enter A Todo...');
                 return state;

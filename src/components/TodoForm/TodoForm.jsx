@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTodosActions } from '../Providers/TodosProvider/TodosProvider';
 import { VscAdd, VscEdit } from "react-icons/vsc";
 import styles from './TodoForm.module.css'
@@ -8,9 +8,16 @@ import styles from './TodoForm.module.css'
 // By send state and setState method
 // const TodoForm = ({todos, setTodos}) => {
 // By Context + Reducer
-const TodoForm = ({submitType="add", inputValue="", todoId}) => {
+const TodoForm = ({submitType="add", inputValue="", todoId, setEditState}) => {
     const dispatch = useTodosActions();
     const [todo, setTodo] = useState(inputValue);
+
+    const inputRef = useRef(null);
+
+    useEffect(()=>{
+        inputRef.current.focus();
+        inputRef.current.select();
+    },[]);
 
     const changeTodoHandler = (event) => {
         setTodo(event.target.value);
@@ -42,7 +49,10 @@ const TodoForm = ({submitType="add", inputValue="", todoId}) => {
         // addTodo();
 
         // By Context + Reducer
-        if(submitType==='edit') dispatch({type: submitType, todo, todoId});
+        if(submitType==='edit') {
+            dispatch({type: submitType, todo, todoId});
+            setEditState();
+        }
         else{
             dispatch({type: submitType, todo});
             setTodo("");
@@ -52,7 +62,7 @@ const TodoForm = ({submitType="add", inputValue="", todoId}) => {
     return ( 
         <div className={`${styles.formContainer} ${submitType}`}>
             <form onSubmit={submitHandler}>
-                <input type='text' value={todo} onChange={changeTodoHandler}/>
+                <input type='text' value={todo} onChange={changeTodoHandler} ref={inputRef}/>
                 <button type='submit'>{submitType === 'add' ? <VscAdd/> : <VscEdit/> }</button>
             </form>
         </div>

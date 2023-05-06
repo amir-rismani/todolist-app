@@ -1,7 +1,7 @@
 form{
     position: relative;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     border: 1px solid lightgray;
     padding: 0 .2rem;
@@ -16,6 +16,10 @@ input{
     height: 2rem;
     padding: 0px .5rem;
     font-size: medium;
+}
+
+form:has(>input:focus){
+    border-color: slateblue;
 }
 
 button {

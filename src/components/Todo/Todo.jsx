@@ -12,9 +12,9 @@ const Todo = ({todo}) => {
         dispatch({type: 'complete', todoId})
     }
 
-    // const editHandler = (todoId) => {
-    //     dispatch({type: 'edit', todo, todoId})
-    // }
+    const editHandler = () => {
+        setIsEdit(false)
+    }
 
     const deleteHandler = (todoId) => {
         dispatch({type: 'delete', todoId})
@@ -25,7 +25,7 @@ const Todo = ({todo}) => {
             <div key={todo.id} className={styles.todo}>
                 { 
                     isEdit ?
-                    <TodoForm submitType="edit" inputValue={todo.content} todoId={todo.id}/>
+                    <TodoForm submitType="edit" inputValue={todo.content} todoId={todo.id} setEditState={editHandler}/>
                     :
                     <label className={todo.isCompleted ? styles.completed : ''}>
                         {todo.content}
