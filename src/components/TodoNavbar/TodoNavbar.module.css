@@ -1,8 +1,20 @@
 .navbar{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 1rem;
+}
+
+.messageContainer, .filter{
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem auto;
+}
+
+.filter span{
+    margin-right: .5rem;
 }
 
 .badge{
@@ -26,4 +38,9 @@
 
 .message.success{
     color: green;
+}
+
+.select{
+    width: 200px;
+    text-align: left;
 }

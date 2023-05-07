@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import styles from './TodosProvider.module.css'
 
 const TodosContext = createContext();
@@ -28,7 +28,7 @@ const initialState = [
 const reducer = (state, action) => {
     const date = new Date();
     const todos = [...state];
-    let index = 0, todo = {}, content = "";
+    let index = 0, todo = {}, content = "", filteredTodos = [];
     switch(action.type){
         case 'add':
             content = action.todo;
@@ -44,11 +44,10 @@ const reducer = (state, action) => {
             })
             return todos
         case 'delete':
-            const filteredTodos = todos.filter(todo => todo.id !== action.todoId);
+            filteredTodos = todos.filter(todo => todo.id !== action.todoId);
             return filteredTodos;
         case 'edit':
             content = action.todo;
-            console.log(content);
             if(!content){
                 alert('Please Enter A Todo...');
                 return state;
@@ -59,12 +58,18 @@ const reducer = (state, action) => {
             todo.updatedAt = date.toISOString();
             todos[index] = todo;
             return todos;
-            case 'complete':
+        case 'complete':
             index = todos.findIndex(todo => todo.id === action.todoId);
             todo = {...state[index]};
             todo.isCompleted = !todo.isCompleted;
             todos[index] = todo;
             return todos;
+        case 'filter':
+            const filterType = action.selectedOption.value;
+            filteredTodos = todos;
+            if (filterType === "completed") filteredTodos = todos.filter(todo => todo.isCompleted);
+            else if (filterType === "uncompleted") filteredTodos = todos.filter(todo => !todo.isCompleted);
+            return filteredTodos;
         default:
             return state;
     }
