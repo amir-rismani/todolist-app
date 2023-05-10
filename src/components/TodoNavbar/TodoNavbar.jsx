@@ -21,6 +21,10 @@ const TodoNavbar = () => {
         setUncompletedCount(() => filteredTodos.filter(todo => !todo.isCompleted).length);
     }, [filteredTodos]);
 
+    useEffect(() => {
+        filterHandler(filter);
+    }, [todos]);
+
     const filterHandler = (selectedOption) => {
         setFilter(selectedOption);
         filteredDispatch({ type: 'filter', selectedOption, allTodos: todos });
